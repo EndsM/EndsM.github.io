@@ -1,0 +1,204 @@
+---
+import astroLogo from "../assets/astro.svg";
+---
+
+<div id="astro-notice" class="notice-box">
+    <button type="button" id="close-notice" aria-label="Close notification">
+        <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="16"
+            height="16"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            stroke-width="2"
+        >
+            <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M6 18L18 6M6 6l12 12"></path>
+        </svg>
+    </button>
+    <div class="notice-content">
+        <img
+            src={astroLogo.src}
+            width="70"
+            height="29"
+            alt="Astro Logo"
+            class="logo"
+        />
+        <h2>Built with Astro</h2>
+        <p>
+            This personal portfolio space is built using the Astro framework for
+            optimal performance.
+        </p>
+        <a
+            href="https://astro.build"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="btn-link"
+        >
+            Visit Astro
+        </a>
+    </div>
+</div>
+
+<script>
+    const notice = document.getElementById("astro-notice");
+    const closeBtn = document.getElementById("close-notice");
+
+    if (notice && closeBtn) {
+        // Check local storage to see if the user closed it previously
+        if (localStorage.getItem("astro-notice-closed") === "true") {
+            notice.style.display = "none";
+        } else {
+            // Ensure it is visible if not closed
+            notice.classList.add("visible");
+        }
+
+        closeBtn.addEventListener("click", () => {
+            notice.classList.remove("visible");
+            // Smooth hide
+            setTimeout(() => {
+                notice.style.display = "none";
+            }, 300);
+            localStorage.setItem("astro-notice-closed", "true");
+        });
+    }
+</script>
+
+<style>
+    .notice-box {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        max-width: 320px;
+        background: rgba(255, 255, 255, 0.7);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        border: 1px solid rgba(255, 255, 255, 0.4);
+        border-radius: 16px;
+        padding: 24px 20px 20px;
+        box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.08);
+        z-index: 100;
+        opacity: 0;
+        transform: translateY(10px);
+        transition:
+            opacity 0.3s ease,
+            transform 0.3s ease;
+        display: none;
+    }
+
+    /* JavaScript toggles this class on load if not previously dismissed */
+    .notice-box.visible {
+        display: block;
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    #close-notice {
+        position: absolute;
+        top: 12px;
+        right: 12px;
+        background: transparent;
+        border: none;
+        color: #4b5563;
+        cursor: pointer;
+        padding: 4px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition:
+            background 0.2s ease,
+            color 0.2s ease;
+    }
+
+    #close-notice:hover {
+        background: rgba(0, 0, 0, 0.05);
+        color: #111827;
+    }
+
+    .notice-content {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .logo {
+        margin-bottom: 12px;
+    }
+
+    h2 {
+        margin: 0 0 6px 0;
+        font-size: 16px;
+        font-weight: 600;
+        color: #111827;
+    }
+
+    p {
+        margin: 0 0 16px 0;
+        font-size: 13px;
+        line-height: 1.5;
+        color: #4b5563;
+    }
+
+    .btn-link {
+        display: inline-flex;
+        align-items: center;
+        font-size: 13px;
+        font-weight: 600;
+        color: white;
+        background: #111827;
+        text-decoration: none;
+        padding: 8px 14px;
+        border-radius: 8px;
+        transition: background 0.2s ease;
+    }
+
+    .btn-link:hover {
+        background: #374151;
+    }
+
+    /* Responsive styling for smaller viewports */
+    @media screen and (max-width: 480px) {
+        .notice-box {
+            bottom: 12px;
+            right: 12px;
+            left: 12px;
+            max-width: calc(100% - 24px);
+        }
+    }
+
+    /* Dark Mode support */
+    @media (prefers-color-scheme: dark) {
+        .notice-box {
+            background: rgba(17, 24, 39, 0.8);
+            border-color: rgba(255, 255, 255, 0.08);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.4);
+        }
+        #close-notice {
+            color: #9ca3af;
+        }
+        #close-notice:hover {
+            background: rgba(255, 255, 255, 0.08);
+            color: #f9fafb;
+        }
+        h2 {
+            color: #f9fafb;
+        }
+        p {
+            color: #9ca3af;
+        }
+        .btn-link {
+            background: #f3f4f6;
+            color: #111827;
+        }
+        .btn-link:hover {
+            background: #e5e7eb;
+        }
+        .logo {
+            filter: invert(1) brightness(2);
+        }
+    }
+</style>
