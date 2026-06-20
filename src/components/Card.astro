@@ -2,9 +2,220 @@
 import background from "../assets/background.svg";
 ---
 
-<div>
+<div id="card-container">
     <img id="background" src={background.src} alt="" fetchpriority="high" />
     <main>
-        <div class="glass-card"></div>
+        <div class="glass-card">
+            <!-- Avatar / Monogram -->
+            <div class="avatar">
+                <span>E</span>
+            </div>
+
+            <!-- Name and Title -->
+            <h1 class="name">EndsM</h1>
+            <p class="tagline">A C# programmer but without C#</p>
+
+            <div class="divider"></div>
+
+            <!-- Description -->
+            <p class="description">
+                Got into development via C# with good old .Net Framework 2.0
+            </p>
+
+            <!-- Links / Actions -->
+            <div class="actions">
+                <a
+                    href="https://github.com/EndsM"
+                    class="btn primary"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    Visit my Github Profile
+                </a>
+                <a href="mailto:lonhongsy@gmail.com" class="btn secondary">
+                    Contact Me via mail
+                </a>
+            </div>
+        </div>
     </main>
 </div>
+
+<style>
+    #background {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+        filter: blur(100px);
+    }
+
+    #card-container {
+        font-family:
+            Inter, Roboto, "Helvetica Neue", "Arial Nova", "Nimbus Sans", Arial,
+            sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        width: 100%;
+        box-sizing: border-box;
+        padding: 20px;
+    }
+
+    main {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+    }
+
+    .glass-card {
+        background: rgba(255, 255, 255, 0.35);
+        backdrop-filter: blur(40px);
+        -webkit-backdrop-filter: blur(40px);
+        border: 1px solid rgba(255, 255, 255, 0.6);
+        border-radius: 24px;
+        padding: 40px 32px;
+        width: 100%;
+        max-width: 380px;
+        box-shadow:
+            0 8px 32px 0 rgba(31, 38, 135, 0.06),
+            inset 0 1px 0 rgba(255, 255, 255, 0.4);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        transition:
+            transform 0.3s ease,
+            box-shadow 0.3s ease;
+    }
+
+    .glass-card:hover {
+        transform: translateY(-2px);
+        box-shadow:
+            0 12px 40px 0 rgba(31, 38, 135, 0.1),
+            inset 0 1px 0 rgba(255, 255, 255, 0.5);
+    }
+
+    /* Monogram Avatar */
+    .avatar {
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+        background: linear-gradient(25deg, #66ccff 0%, #7fa4d8 100%);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 36px;
+        font-weight: 700;
+        color: white;
+        margin-bottom: 20px;
+        box-shadow: 0 8px 20px rgba(216, 51, 51, 0.2);
+        user-select: none;
+    }
+
+    .name {
+        font-size: 28px;
+        font-weight: 700;
+        color: #111827;
+        margin: 0 0 6px 0;
+        letter-spacing: -0.02em;
+    }
+
+    .tagline {
+        font-size: 15px;
+        font-weight: 500;
+        color: #4b5563;
+        margin: 0 0 20px 0;
+    }
+
+    .divider {
+        width: 100%;
+        height: 1px;
+        background: rgba(0, 0, 0, 0.08);
+        margin-bottom: 20px;
+    }
+
+    .description {
+        font-size: 14px;
+        line-height: 1.6;
+        color: #4b5563;
+        margin: 0 0 28px 0;
+    }
+
+    .actions {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        width: 100%;
+    }
+
+    .btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 12px 16px;
+        border-radius: 12px;
+        font-size: 14px;
+        font-weight: 600;
+        text-decoration: none;
+        transition: all 0.2s ease;
+        box-sizing: border-box;
+    }
+
+    .btn.primary {
+        background: linear-gradient(83.21deg, #3245ff 0%, #bc52ee 100%);
+        color: white;
+        box-shadow:
+            inset 0 0 0 1px rgba(255, 255, 255, 0.12),
+            inset 0 -2px 0 rgba(0, 0, 0, 0.2);
+    }
+
+    .btn.primary:hover {
+        opacity: 0.95;
+        box-shadow:
+            0 4px 12px rgba(50, 69, 255, 0.25),
+            inset 0 0 0 1px rgba(255, 255, 255, 0.12);
+    }
+
+    .btn.secondary {
+        background: rgba(255, 255, 255, 0.5);
+        color: #111827;
+        border: 1px solid rgba(0, 0, 0, 0.06);
+    }
+
+    .btn.secondary:hover {
+        background: rgba(255, 255, 255, 0.85);
+        border-color: rgba(0, 0, 0, 0.1);
+    }
+
+    /* Dark Mode Theme Adjustment via Preference */
+    @media (prefers-color-scheme: dark) {
+        .glass-card {
+            background: rgba(17, 24, 39, 0.65);
+            border-color: rgba(255, 255, 255, 0.1);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+        }
+        .name {
+            color: #f9fafb;
+        }
+        .tagline {
+            color: #9ca3af;
+        }
+        .divider {
+            background: rgba(255, 255, 255, 0.1);
+        }
+        .description {
+            color: #d1d5db;
+        }
+        .btn.secondary {
+            background: rgba(255, 255, 255, 0.07);
+            color: #f9fafb;
+            border-color: rgba(255, 255, 255, 0.1);
+        }
+        .btn.secondary:hover {
+            background: rgba(255, 255, 255, 0.15);
+        }
+    }
+</style>
